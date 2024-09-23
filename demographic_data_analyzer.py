@@ -28,7 +28,7 @@ def calculate_demographic_data(print_data=True):
 
     advanced_education_50k = (masters_50k + doctorate_50k + bachelor_50k)
     
-    percentage_advanced_education_50k = round((advanced_education_50k / total) * 100, 1)
+    percentage_advanced_education_50k = round((advanced_education_50k / advanced_education) * 100, 1)
 
 
     # What percentage of people without advanced education make more than 50K?
@@ -37,7 +37,7 @@ def calculate_demographic_data(print_data=True):
 
     not_advanced_education_50k = len(not_advanced_education[not_advanced_education['salary'] == '>50K'])
 
-    percentage_not_advanced_education_50k = round((not_advanced_education_50k / total) * 100, 1)
+    percentage_not_advanced_education_50k = round((not_advanced_education_50k / len(not_advanced_education)) * 100, 1)
 
     # with and without `Bachelors`, `Masters`, or `Doctorate`
     higher_education = advanced_education
@@ -56,7 +56,7 @@ def calculate_demographic_data(print_data=True):
 
     min_hour_50k = len(df[(df['hours-per-week'] == min_work_hours) & (df['salary'] == '>50K')])
 
-    percentage_min_hour_50k = round((min_hour_50k / total) * 100, 1)
+    percentage_min_hour_50k = round((min_hour_50k / num_min_workers) * 100, 1)
 
     rich_percentage = percentage_min_hour_50k
 
@@ -71,7 +71,7 @@ def calculate_demographic_data(print_data=True):
     percentage_above_50k = ((above_50k_per_country / total_per_country) * 100).round(1)
 
 
-    highest_earning_country = above_50k_per_country.idxmax()
+    highest_earning_country = percentage_above_50k.idxmax()
     highest_earning_country_percentage = round((above_50k_per_country[highest_earning_country] / total_per_country[highest_earning_country]) * 100, 1)
 
     # Identify the most popular occupation for those who earn >50K in India.
